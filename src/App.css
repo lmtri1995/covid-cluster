@@ -13,7 +13,7 @@ svg g {
   fill-opacity: 0.6;
 }
 svg g:hover {
-  fill: #7be3f6;
+  fill: #000000;
   fill-opacity: 0.7;
 }
 svg g:hover text {
@@ -21,7 +21,7 @@ svg g:hover text {
 }
 
 svg g polygon {
-  stroke: #7be3f6;
+  stroke: #000000;
   stroke-width: 0.2;
   transition: fill-opacity .5s;
 }
@@ -32,7 +32,7 @@ svg g text {
 }
 svg path {
   fill: none;
-  stroke: #7be3f6;
+  stroke: #000000;
   stroke-width: 0.2em;
   stroke-opacity: 0.7;
   stroke-linecap: round;
