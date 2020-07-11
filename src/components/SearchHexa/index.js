@@ -12,9 +12,10 @@ const useStyles = makeStyles(() => ({
 	},
 
 	button: {
+			height: '56px',
     	fontStyle: 'normal',
     	fontWeight: 600,
-    	fontSize: '13px',
+    	fontSize: '15px',
     	lineHeight: '19px',
     	textAlign: 'center',
     	letterSpacing: '0.01em',
@@ -27,20 +28,31 @@ const useStyles = makeStyles(() => ({
 
 function SearchHexa() {
 	const [name, setName] = useState('')
+	const [nameValid, setNameValid] = useState(true)
+	const [nameErrorText, setNameErrorText] = useState('')
 	const classes = useStyles()
 
+	const checkValid = () => {
+		if(name === '') {
+      setNameValid(false)
+      setNameErrorText('Please enter name of hexagon')
+    } else {
+      setNameValid(true)
+      setNameErrorText('')
+    }
+	}
+
 	const handleRemove = () => {
-		console.log(name)
+		checkValid()
 	}
 
 	const handleSearch = () => {
-		console.log(name)
+		checkValid()
 	}
 
 	return (
 		<FormControl className={classes.root}>
 				<TextField
-            		autoFocus
             		required
             		margin="dense"
             		id="projectUrl"
@@ -51,6 +63,8 @@ function SearchHexa() {
             		onChange={(e) => setName(e.target.value)}
 								label="Please enter hexagon name" variant="outlined"
 								style={{ marginBottom: '10px' }}
+								error={!nameValid}
+								helperText={nameErrorText}
           		/>
           		<Grid container>
           			<Grid item xs={6} style={{ paddingRight: '5px' }}>
