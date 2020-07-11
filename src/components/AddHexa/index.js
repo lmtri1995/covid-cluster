@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import InputLabel from '@material-ui/core/InputLabel'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -18,9 +16,10 @@ const useStyles = makeStyles(() => ({
     marginBottom: '10px'
   },
 	button: {
+      height: '56px',
     	fontStyle: 'normal',
     	fontWeight: 600,
-    	fontSize: '13px',
+    	fontSize: '15px',
     	lineHeight: '19px',
     	textAlign: 'center',
     	letterSpacing: '0.01em',
@@ -33,21 +32,57 @@ const useStyles = makeStyles(() => ({
 
 function AddHexa() {
   const [name, setName] = useState('')
+  const [neighbor, setNeighbor] = useState('')
+  const [nameValid, setNameValid] = useState(true)
+  const [neighborValid, setNeighborValid] = useState(true)
   const [border, setBorder] = useState(0)
-	const classes = useStyles()
+  const [nameErrorText, setNameErrorText] = useState('')
+  const [neighborErrorText, setNeighborErrorText] = useState('') 
+  const [loading, setLoading] = useState(false)
+  const classes = useStyles()
+  const message = useRef(0)
+
+  const checkValidName = () => {
+    if(name === '') {
+      setNameValid(false)
+      setNameErrorText('Please enter name of hexagon')
+    } else {
+      setNameValid(true)
+      setNameErrorText('')
+    }
+  }
+
+  const checkValidNeighbor = () => {
+    if(neighbor === '') {
+      setNeighborValid(false)
+      setNeighborErrorText('Please enter name of neighbor')
+    } else {
+      setNeighborValid(true)
+      setNeighborErrorText('')
+    }
+  }
 
 	const handleAdd = () => {
-		console.log(name)
+    checkValidName()
+    checkValidNeighbor()
+
   }
   
   const handleChange = (event) => {
     setBorder(event.target.value)
   }
 
+  let button
+  if(loading) {
+    button = <Button className={classes.button} onClick={handleAdd}><CircularProgress /></Button>
+  } else {
+    button = <Button className={classes.button} onClick={handleAdd}>ADD</Button>
+  }
+
 	return (
     <FormControl className={classes.root}>
 		  <TextField
-        autoFocus
+        error={!nameValid}
         required
         margin="dense"
         id="projectUrl"
@@ -57,19 +92,21 @@ function AddHexa() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         label="New hexagon name" variant="outlined"
+        helperText={nameErrorText}
       />
 
       <TextField
-        autoFocus
+        error={!neighborValid}
         required
         margin="dense"
         id="projectUrl"
         label="Project repo URL"
         type="text"
         fullWidth
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={neighbor}
+        onChange={(e) => setNeighbor(e.target.value)}
         label="Neighbor hexagon name" variant="outlined"
+        helperText={neighborErrorText}
         />
       
       <Select
@@ -90,8 +127,8 @@ function AddHexa() {
           <MenuItem value={4}>4</MenuItem>
           <MenuItem value={5}>5</MenuItem>
         </Select>
-       
-        <Button className={classes.button} onClick={handleAdd}>Add</Button>
+        <p ref={message}></p>
+        {button}
 		</FormControl>
 	)
 }
