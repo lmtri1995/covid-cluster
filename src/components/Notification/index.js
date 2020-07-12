@@ -7,8 +7,6 @@ const useStyles  = makeStyles((theme) => ({
   root: {
     color: '#919892;',
     width: '300px',
-    backgroundColor: '#edfcef',
-    border: '1px solid #d1ecd5',
     padding: '8px',
     borderRadius: '4px',
     display: 'flex',
@@ -27,11 +25,12 @@ const useStyles  = makeStyles((theme) => ({
 }))
 
 export default function MessageNotification(props) {
-  const {handleMessage, message} = props
+  const {handleMessage, message, color} = props
   const styles = useStyles()
+  console.log(color)
 
   return (
-    <div className={styles.root} style={{display: `${message === '' ? "none" : "flex"}` }}>
+    <div className={styles.root} style={{display: `${message === '' ? "none" : "flex"}`, backgroundColor: `${color}` }}>
      
         &nbsp;{}&nbsp;<strong>{message}</strong>
       <CloseIcon className={styles.closeIcon} onClick={handleMessage} />

@@ -26,6 +26,7 @@ function Layout() {
   const classes = useStyles()
   const [hexaGridData, setGridData] = useState([])
   const [message, setMessage] = useState('')
+  const [notificationColor, setNotificationColor] = useState('')
 
   useEffect(() => {
     apiClient.api.getAllHexa().then((response) => {
@@ -40,6 +41,10 @@ function Layout() {
   const searchHexa = (name) => {
     apiClient.api.searchHexa(name).then((response) => {
       console.log(response)
+      setNotificationColor('#edfcef')
+    }).catch((error) => {
+      setMessage(error.response.data.message)
+      setNotificationColor('#f7646475')
     })
   }
 
@@ -50,8 +55,10 @@ function Layout() {
       const removed = hexaGridData.filter(function(el) { return el.name != removedHexa.name })
       setGridData(removed)
       setMessage(`You 've successfully removed hexagon ${name}`)
+      setNotificationColor('#c9f3ce')
     }).catch((error) => {
-
+      setMessage(error.response.data.message)
+      setNotificationColor('#f7646475')
     })
   }
 
@@ -61,6 +68,7 @@ function Layout() {
       const newHexa = response.data
       setGridData([...hexaGridData, newHexa])
       setMessage(`You 've successfully added hexagon ${newHexa.name}`)
+      setNotificationColor('#c9f3ce')
     })
   }
 
@@ -89,7 +97,7 @@ function Layout() {
       <h2>Welcome to Hexaland</h2>
       {hexaGrid}
       <Container>
-        <Notification handleMessage={closeNotification} message={message}/>
+        <Notification handleMessage={closeNotification} message={message} color={notificationColor}/>
         <section style={{ justifyContent: 'center', display: 'flex' }} >
           <div className={classes.addHexa}>
             <AddHexa onChange={handleAddHexa} isGridEmpty={isGridEmpty}/>
