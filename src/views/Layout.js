@@ -30,7 +30,7 @@ function Layout() {
     apiClient.api.getAllHexa().then((response) => {
       setGridData(response.data)
     })
-  })
+  }, [])
 
   const closeNotification = () => {
     setHexName('')
@@ -76,6 +76,7 @@ function Layout() {
     )
   }
 
+  const isGridEmpty = (Object.keys(hexaGridData).length === 0) ? true : false
   return (
     <>
       <h2>Welcome to Hexaland</h2>
@@ -84,7 +85,7 @@ function Layout() {
         <Notification hexName={hexName} handleMessage={closeNotification} />
         <section style={{ justifyContent: 'center', display: 'flex' }} >
           <div className={classes.addHexa}>
-            <AddHexa onChange={handleAddHexa} />
+            <AddHexa onChange={handleAddHexa} isGridEmpty={isGridEmpty}/>
           </div>
           <div>
             <SearchRemoveHexa onChange={handleSearchRemoveHexa} />

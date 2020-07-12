@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 function AddHexa(props) {
-  const { onChange } = props
+  const { onChange, isGridEmpty } = props
   const [name, setName] = useState('')
   const [neighbor, setNeighbor] = useState('')
   const [nameValid, setNameValid] = useState(true)
@@ -68,7 +68,7 @@ function AddHexa(props) {
   }
 
 	const handleAdd = () => {
-    if(checkValidName() && checkValidNeighbor()) {
+    if(checkValidName() && (checkValidNeighbor() || isGridEmpty)) {
       const data = {
         name: name,
         neighbor: neighbor,
@@ -89,6 +89,29 @@ function AddHexa(props) {
     button = <Button className={classes.button} onClick={handleAdd}>ADD</Button>
   }
 
+  let neighbotTextField
+  if(isGridEmpty) {
+    neighbotTextField = (
+      <></>
+    )
+  } else {
+    neighbotTextField = (
+      <TextField
+      error={!neighborValid}
+      required
+      margin="dense"
+      id="projectUrl"
+      label="Project repo URL"
+      type="text"
+      fullWidth
+      value={neighbor}
+      onChange={(e) => setNeighbor(e.target.value)}
+      label="Neighbor hexagon name" variant="outlined"
+      helperText={neighborErrorText}
+      />
+    )
+  }
+
 	return (
     <FormControl className={classes.root}>
 		  <TextField
@@ -105,20 +128,7 @@ function AddHexa(props) {
         helperText={nameErrorText}
       />
 
-      <TextField
-        error={!neighborValid}
-        required
-        margin="dense"
-        id="projectUrl"
-        label="Project repo URL"
-        type="text"
-        fullWidth
-        value={neighbor}
-        onChange={(e) => setNeighbor(e.target.value)}
-        label="Neighbor hexagon name" variant="outlined"
-        helperText={neighborErrorText}
-        />
-      
+      {neighbotTextField}
       <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
