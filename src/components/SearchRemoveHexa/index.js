@@ -26,7 +26,8 @@ const useStyles = makeStyles(() => ({
   	}
 }))
 
-function SearchHexa() {
+function SearchRemoveHexa(props) {
+	const { onChange } = props
 	const [name, setName] = useState('')
 	const [nameValid, setNameValid] = useState(true)
 	const [nameErrorText, setNameErrorText] = useState('')
@@ -35,19 +36,33 @@ function SearchHexa() {
 	const checkValid = () => {
 		if(name === '') {
       setNameValid(false)
-      setNameErrorText('Please enter name of hexagon')
-    } else {
-      setNameValid(true)
-      setNameErrorText('')
+			setNameErrorText('Please enter name of hexagon')
+			return false
     }
+			
+		setNameValid(true)
+    setNameErrorText('')
+		return true
 	}
 
 	const handleRemove = () => {
-		checkValid()
+		if(checkValid()) {
+			const data = {
+				name: name,
+				action: 'remove'
+			}
+			onChange(data)
+		}
 	}
 
 	const handleSearch = () => {
-		checkValid()
+		if(checkValid()) {
+			const data = {
+				name: name,
+				action: 'search'
+			}
+			onChange(data)
+		}
 	}
 
 	return (
@@ -79,4 +94,4 @@ function SearchHexa() {
 	)
 }
 
-export default SearchHexa
+export default SearchRemoveHexa

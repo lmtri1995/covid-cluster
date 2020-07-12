@@ -7,7 +7,6 @@ const moreHexas = GridGenerator.parallelogram(-2, 2, -2, 2);
 function HexaGrid(props) {
   const { data } = props
 
-  console.log(data)
   return (
 
     <HexGrid width={1200} height={800} viewBox="-50 -50 100 100">

@@ -1,17 +1,13 @@
 import { BaseApiClient } from './base'
 
-const ADD_HEXA_PATH = (repoId) => `/hexa/`
+const ADD_HEXA_PATH = `/hexa/`
 const GET_ALL_HEXA_PATH = `/hexa/`
 const SEARCH_HEXA_PATH = (hexaName) => `/hexa/${hexaName}`
 const REMOVE_HEXA_PATH = (hexaName) => `/hexa/${hexaName}`
 
 export default class HexaApiClient extends BaseApiClient {
-  getAllHexa(hexaName, neighbor, border) {
-  	const additionalInfo = {
-  		neighbor: neighbor,
-  		border: border
-  	}
-    return this.httpClient.post(ADD_HEXA_PATH(hexaName), { body: additionalInfo })
+  addHexa(addInfo) {
+    return this.httpClient.post(ADD_HEXA_PATH, { body: addInfo })
   }
 
   removeHexa(hexaName) {
