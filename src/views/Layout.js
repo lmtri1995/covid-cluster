@@ -28,6 +28,7 @@ function Layout() {
   const [message, setMessage] = useState('')
   const [notificationColor, setNotificationColor] = useState('')
   const [isLoading, setLoading] = useState(false)
+  const [hexaSearchInfo, setSearchInfo] = useState({})
 
   useEffect(() => {
     apiClient.api.getAllHexa().then((response) => {
@@ -41,11 +42,10 @@ function Layout() {
 
   const searchHexa = (name) => {
     apiClient.api.searchHexa(name).then((response) => {
-      console.log(response)
       setNotificationColor('#edfcef')
       setLoading(false)
+      setSearchInfo(response.data)
     }).catch((error) => {
-      console.log(error.response.data.message)
       setMessage(error.response.data.message)
       setNotificationColor('#f7646475')
       setLoading(false)
@@ -108,12 +108,27 @@ function Layout() {
   }
 
   const isGridEmpty = (Object.keys(hexaGridData).length === 0) ? true : false
+
+  let searchInfo
+  if(Object.keys(hexaSearchInfo).length === 0) {
+    searchInfo = (
+      <></>
+    )
+  } else {
+    console.log(hexaSearchInfo)
+    searchInfo = (
+    <div>{hexaSearchInfo.name}</div>
+    )
+  }
+
+
   return (
     <>
       <h2>Welcome to Hexaland</h2>
       {hexaGrid}
       <Container>
         {notification}
+        {searchInfo}
         <section style={{ justifyContent: 'center', display: 'flex' }} >
           <div className={classes.addHexa}>
             <AddHexa onChange={handleAddHexa} isGridEmpty={isGridEmpty}/>
