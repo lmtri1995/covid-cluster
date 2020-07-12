@@ -1,7 +1,7 @@
 import React from 'react';
 import { GridGenerator, Hexagon, HexGrid, Layout, Text } from 'react-hexgrid';
 
-const hexagonSize = { x: 10, y: 10 };
+const hexagonSize = { x: 7, y: 7 };
 const moreHexas = GridGenerator.parallelogram(-2, 2, -2, 2);
 
 function HexaGrid(props) {
