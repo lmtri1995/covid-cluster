@@ -43,6 +43,11 @@ function AddHexa(props) {
   const classes = useStyles()
   const message = useRef(0)
 
+  const reset = () => {
+    setName('')
+    setNeighbor('')
+  }
+
   const checkValidName = () => {
     if(name === '') {
       setNameValid(false)
@@ -75,6 +80,7 @@ function AddHexa(props) {
         border: border
       }
       onChange(data)
+      reset()
     }
   }
   

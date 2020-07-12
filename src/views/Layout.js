@@ -38,7 +38,6 @@ function Layout() {
   }
 
   const searchHexa = (name) => {
-    console.log('search', name)
     apiClient.api.searchHexa(name).then((response) => {
       console.log(response)
     })
@@ -46,6 +45,10 @@ function Layout() {
 
   const removeHexa = (name) => {
     apiClient.api.removeHexa(name).then((response) => {
+      const removedHexa = response.data
+
+      const removed = hexaGridData.filter(function(el) { return el.name != removedHexa.name })
+      setGridData(removed)
       setMessage(`You 've successfully removed hexagon ${name}`)
     }).catch((error) => {
 

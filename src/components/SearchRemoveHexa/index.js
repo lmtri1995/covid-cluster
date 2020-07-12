@@ -33,6 +33,10 @@ function SearchRemoveHexa(props) {
 	const [nameErrorText, setNameErrorText] = useState('')
 	const classes = useStyles()
 
+	const reset = () => {
+		setName('')
+	}
+
 	const checkValid = () => {
 		if(name === '') {
       setNameValid(false)
@@ -41,7 +45,8 @@ function SearchRemoveHexa(props) {
     }
 			
 		setNameValid(true)
-    setNameErrorText('')
+		setNameErrorText('')
+		reset()
 		return true
 	}
 
