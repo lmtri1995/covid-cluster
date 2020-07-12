@@ -121,7 +121,6 @@ function Layout() {
       <></>
     )
   } else {
-    console.log(hexaSearchInfo)
     searchInfo = (
       <div>
         <div>Name: {hexaSearchInfo.name}</div>
