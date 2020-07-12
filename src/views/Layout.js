@@ -15,9 +15,13 @@ const useStyles = makeStyles(() => ({
     fontSize: '30px',
   },
   addHexa: {
-    marginRight: '10px',
+    marginRight: '10px'
   },
-}));
+  grid: {
+    height: '710px',
+    overflow: 'scroll'
+  }
+}))
 
 
 const apiClient = new ApiClient();
@@ -143,11 +147,13 @@ function Layout() {
   return (
     <>
       <h2>Welcome to Hexaland</h2>
-      {hexaGrid}
+      <div className={classes.grid}>
+        {hexaGrid}
+      </div>
       <Container>
         {notification}
         {searchInfo}
-        <section style={{ justifyContent: 'center', display: 'flex' }}>
+        <section style={{ justifyContent: 'space-around', display: 'flex' }} >
           <div className={classes.addHexa}>
             <AddHexa onChange={handleAddHexa} isGridEmpty={isGridEmpty} />
           </div>

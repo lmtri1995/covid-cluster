@@ -1,9 +1,11 @@
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import FormControl from '@material-ui/core/FormControl'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container'
+import { makeStyles } from '@material-ui/core/styles'
+import FormLabel from '@material-ui/core/FormLabel'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -69,26 +71,27 @@ function SearchRemoveHexa(props) {
     }
   };
 
-  return (
-    <FormControl className={classes.root}>
-      <TextField
-        required
-        margin="dense"
-        id="projectUrl"
-        label="Project repo URL"
-        type="text"
-        fullWidth
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        label="Please enter hexagon name" variant="outlined"
-        style={{ marginBottom: '10px' }}
-        error={!nameValid}
-        helperText={nameErrorText}
-      />
-      <Grid container>
-        <Grid item xs={6} style={{ paddingRight: '5px' }}>
-          <Button className={classes.button} onClick={handleSearch}>Search</Button>
-        </Grid>
+	return (
+		<FormControl className={classes.root}>
+				<FormLabel>Search and remove hexagon</FormLabel>
+				<TextField
+            		required
+            		margin="dense"
+            		id="projectUrl"
+            		label="Project repo URL"
+            		type="text"
+            		fullWidth
+            		value={name}
+            		onChange={(e) => setName(e.target.value)}
+								label="Please enter hexagon name" variant="outlined"
+								style={{ marginBottom: '10px' }}
+								error={!nameValid}
+								helperText={nameErrorText}
+          		/>
+          		<Grid container>
+          			<Grid item xs={6} style={{ paddingRight: '5px' }}>
+          				<Button className={classes.button} onClick={handleSearch}>Search</Button>
+          			</Grid>
 
         <Grid item xs={6} style={{ paddingLeft: '5px' }}>
           <Button className={classes.button} onClick={handleRemove}>Remove</Button>
