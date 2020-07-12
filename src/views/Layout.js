@@ -70,6 +70,7 @@ function Layout() {
 
   const handleAddHexa = (hexa) => {
     setLoading(true)
+    setSearchInfo({})
     apiClient.api.addHexa(hexa).then((response) => {
       
       const newHexa = response.data
@@ -82,6 +83,7 @@ function Layout() {
 
   const handleSearchRemoveHexa = (hexa) => {
     setLoading(true)
+    setSearchInfo({})
     if(hexa.action === 'search') {
       searchHexa(hexa.name)
     } else if(hexa.action === 'remove') {
@@ -117,7 +119,20 @@ function Layout() {
   } else {
     console.log(hexaSearchInfo)
     searchInfo = (
-    <div>{hexaSearchInfo.name}</div>
+      <div>
+        <div>Name: {hexaSearchInfo.name}</div>
+        <div>
+        <div>Neighbors: </div>
+        {Object.keys(hexaSearchInfo.props).map((key => {
+          if(key !== 'coordinates') {
+            return (
+              <div>({key}, {hexaSearchInfo.props[key]})</div>
+            )
+          }
+        }
+        ))}
+        </div>
+      </div>
     )
   }
 
