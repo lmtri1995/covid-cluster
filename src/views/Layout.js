@@ -11,7 +11,8 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 const useStyles = makeStyles(() => ({
 	root: {
-		width: '300px'
+    padding: '50px',
+    fontSize: '30px'
   },
   addHexa: {
     marginRight: '10px'
@@ -71,7 +72,7 @@ function Layout() {
   let hexaGrid
   if(Object.keys(hexaGridData).length === 0){
     hexaGrid = (
-      <CircularProgress />
+      <div className={classes.root}> There is no hexagon, please add one</div>
     )
   } else {
     hexaGrid = (
