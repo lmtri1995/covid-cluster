@@ -1,9 +1,8 @@
-import React from 'react'
-import CheckCircleIcon from '@material-ui/icons/CheckCircle'
-import { makeStyles } from '@material-ui/core/styles'
-import CloseIcon from '@material-ui/icons/Close'; 
+import { makeStyles } from '@material-ui/core/styles';
+import CloseIcon from '@material-ui/icons/Close';
+import React from 'react';
 
-const useStyles  = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     color: '#919892;',
     width: '300px',
@@ -17,24 +16,25 @@ const useStyles  = makeStyles((theme) => ({
   },
   closeIcon: {
     marginLeft: 'auto',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   addIcon: {
     color: '#4ad962',
-  }
-}))
+  },
+}));
 
 export default function MessageNotification(props) {
-  const {handleMessage, message, color} = props
-  const styles = useStyles()
-  console.log(color)
+  const { handleMessage, message, color } = props;
+  const styles = useStyles();
+  console.log(color);
 
   return (
-    <div className={styles.root} style={{display: `${message === '' ? "none" : "flex"}`, backgroundColor: `${color}` }}>
-     
-        &nbsp;{}&nbsp;<strong>{message}</strong>
+    <div className={styles.root}
+         style={{ display: `${message === '' ? 'none' : 'flex'}`, backgroundColor: `${color}` }}>
+
+      &nbsp;{}&nbsp;<strong>{message}</strong>
       <CloseIcon className={styles.closeIcon} onClick={handleMessage} />
     </div>
-  )
+  );
 
 }

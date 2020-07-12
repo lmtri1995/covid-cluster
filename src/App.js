@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import './App.css'
-import Layout from '../src/views/Layout'
+import React from 'react';
+import Layout from '../src/views/Layout';
+import './App.css';
 
 function App() {
 
