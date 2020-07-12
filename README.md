@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Setup environment
+
+1. Run `yarn` command to install all necessary dependencies.
+
+2. Create `.env` file at root directory with the following content:
+REACT_APP_API_URL=http://localhost:8000/api/v1
+
 ## Available Scripts
 
 In the project directory, you can run:
