@@ -15,7 +15,7 @@ const useStyles  = makeStyles((theme) => ({
     alignItems: 'center',
     fontSize: '13px',
     height: '50px',
-    margin: 'auto'
+    margin: 'auto',
   },
   closeIcon: {
     marginLeft: 'auto',
@@ -27,13 +27,13 @@ const useStyles  = makeStyles((theme) => ({
 }))
 
 export default function MessageNotification(props) {
-  const {hexName, handleMessage} = props
+  const {handleMessage, message} = props
   const styles = useStyles()
 
   return (
-    <div className={styles.root} style={{display: `${hexName === '' ? "none" : "flex"}` }}>
+    <div className={styles.root} style={{display: `${message === '' ? "none" : "flex"}` }}>
      
-        &nbsp;You've successfully add a new hexagon&nbsp;<strong>{hexName}</strong>
+        &nbsp;{}&nbsp;<strong>{message}</strong>
       <CloseIcon className={styles.closeIcon} onClick={handleMessage} />
     </div>
   )
