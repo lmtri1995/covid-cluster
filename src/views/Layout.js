@@ -6,6 +6,7 @@ import HexaGrid from '../components/HexaGrid'
 import SearchHexa from '../components/SearchHexa'
 import AddHexa from '../components/AddHexa'
 import Notification from '../components/Notification'
+import { ApiClient } from '../apis' 
 
 
 const useStyles = makeStyles(() => ({
@@ -18,10 +19,18 @@ const useStyles = makeStyles(() => ({
 }))
 
 
-const hexaGridData = {'0,0': 'ax', '0,-1': 'bx', '0,1': 'cx', '1,-1': 'dx', '1,0': 'ex', '-1,1': 'fx', '-1,0': 'gx', '-2,0': 'hx'}
+const apiClient = new ApiClient()
+
 function Layout() {
   const classes = useStyles()
   const [hexName, setHexName] = useState('')
+  const [hexaGridData, setGridData] = useState({})
+
+useEffect(() => {
+  apiClient.api.getAllHexa().then((response) => {
+    setGridData(response.data)
+  })
+})
 
   const closeNotification = () => {
     setHexName('')
