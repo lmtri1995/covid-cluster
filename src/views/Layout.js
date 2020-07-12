@@ -6,7 +6,7 @@ import HexaGrid from '../components/HexaGrid'
 import SearchRemoveHexa from '../components/SearchRemoveHexa'
 import AddHexa from '../components/AddHexa'
 import Notification from '../components/Notification'
-import { ApiClient } from '../apis' 
+import { ApiClient } from '../apis'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 const useStyles = makeStyles(() => ({
@@ -72,11 +72,15 @@ function Layout() {
     setLoading(true)
     setSearchInfo({})
     apiClient.api.addHexa(hexa).then((response) => {
-      
+
       const newHexa = response.data
       setGridData([...hexaGridData, newHexa])
       setMessage(`You 've successfully added hexagon ${newHexa.name}`)
       setNotificationColor('#c9f3ce')
+      setLoading(false)
+    }).catch((error) => {
+      setMessage(error.response.data.message)
+      setNotificationColor('#f7646475')
       setLoading(false)
     })
   }
