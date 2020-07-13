@@ -18,8 +18,6 @@ const useStyles = makeStyles(() => ({
     marginRight: '10px'
   },
   grid: {
-    height: '710px',
-    overflow: 'scroll'
   }
 }))
 

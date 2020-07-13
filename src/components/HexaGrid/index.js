@@ -1,7 +1,7 @@
 import React from 'react';
 import { GridGenerator, Hexagon, HexGrid, Layout, Text } from 'react-hexgrid';
 
-const hexagonSize = { x: 7, y: 7 };
+const hexagonSize = { x: 10, y: 10 };
 const moreHexas = GridGenerator.parallelogram(-2, 2, -2, 2);
 
 function HexaGrid(props) {
@@ -9,7 +9,7 @@ function HexaGrid(props) {
 
   return (
 
-    <HexGrid width={1200} height={800} viewBox="-50 -50 100 100">
+    <HexGrid width={1200} height={800} viewBox="-120 -120 250 250">
       {/* Main grid with bit hexagons, all manual */}
       <Layout size={hexagonSize} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
         {data.map((hexa) => {
